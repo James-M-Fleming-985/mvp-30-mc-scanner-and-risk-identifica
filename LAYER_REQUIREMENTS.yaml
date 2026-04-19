@@ -1,0 +1,54 @@
+acceptance_criteria:
+- criterion: System must ingest regulatory data from multiple sources including APIs,
+    RSS feeds, and HTML scraping
+  criterion_id: AC-001
+  description: The platform shall support automated collection from UK REACH (HSE,
+    DEFRA), ECHA Open Data API, EPA datasets, RSS feeds from government portals, and
+    HTML scraping of regulator websites. Each ingestion method must handle errors
+    gracefully and log source attribution.
+- criterion: System must convert raw regulatory signals into structured events with
+    risk scoring
+  criterion_id: AC-002
+  description: Raw regulatory data must be processed into machine-readable events
+    containing classification, affected materials, risk level, and a single Risk Priority
+    Index score. Events must include metadata such as source, detection timestamp,
+    and regulatory framework type.
+- criterion: Dashboard must display regulatory event feed with filtering and risk
+    visualization
+  criterion_id: AC-003
+  description: The UI shall provide a chronological regulatory event feed with severity
+    indicators, risk heatmap visualization, and filtering capabilities by region,
+    regulation type, impact level, substance, and date range. Interface must be minimal
+    and compliance-focused for rapid triage.
+- criterion: System must provide modular framework supporting UK REACH with expansion
+    capability
+  criterion_id: AC-004
+  description: Architecture must implement UK REACH compliance monitoring as the initial
+    module while providing a modular framework that supports future expansion to EU
+    REACH, US TSCA, RoHS, PFAS, and other regulatory frameworks without core system
+    modifications.
+e2e_test_scenarios:
+- description: Testing complete user workflow from regulatory change detection through
+    dashboard visualization and filtering
+  scenario: Regulatory Change Detection and User Dashboard Workflow
+  test_class: TestE2ERegulatoryWorkflow
+  tests:
+  - test_regulatory_change_detection_to_dashboard_display
+  - test_user_filtering_and_risk_prioritization_workflow
+feature_name: Regulatory Intelligence Risk Scanner
+integration_test_scenarios:
+- description: Testing the complete flow from data source ingestion through risk scoring
+    and event creation
+  scenario: Data Ingestion and Risk Processing Integration
+  test_class: TestIntegrationDataProcessing
+  tests:
+  - test_api_ingestion_to_risk_scoring
+  - test_rss_feed_processing_pipeline
+  - test_html_scraping_to_structured_events
+layer_id: LAYER-MVP-0030
+requirement_title: Platform for detecting, classifying, and prioritizing materials
+  compliance regulatory changes
+technical_constraints:
+  framework: FastAPI
+  language: Python
+  output_file_type: .py
